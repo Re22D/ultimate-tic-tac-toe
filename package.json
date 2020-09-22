@@ -1,0 +1,24 @@
+{
+  "name": "ultimate-tic-tac-toe",
+  "version": "1.0.0",
+  "description": "The game Ultimate Tic-Tac-Toe",
+  "main": "index.html",
+  "dependencies": {
+    "eslint": "^7.9.0",
+    "lodash": "^4.17.20"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Re22D/ultimate-tic-tac-toe.git"
+  },
+  "author": "Rev",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Re22D/ultimate-tic-tac-toe/issues"
+  },
+  "homepage": "https://github.com/Re22D/ultimate-tic-tac-toe#readme"
+}

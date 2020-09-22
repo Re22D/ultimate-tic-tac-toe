@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Ultimate Tic-Tac-Toe</title>
+  <meta charset="utf-8">
+  <!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
+  <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"> -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script> -->
+  <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script> -->
+  <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.15/lodash.min.js"></script>
+
+  <link rel="stylesheet" type="text/css" href="./src/style/style.css" />
+</head>
+<body>
+
+  <h1>Ultimate Tic-Tac-Toe</h1>
+  <!-- <div class="playZone"> -->
+    <aside>
+      <div id="gameInfo">
+        <h3> Game Info</h3>
+        <p id="gameStatus"> </p>
+        <p id="humPlayerSign"> Player 1: </p>
+        <p id="compPlayerSign"> Player 2: </p>
+      </div>
+      
+      <div id="scoreBoard">
+        <h3>Score Board</h3>
+      </div>
+    </br>
+      <button id="resetBtn" onclick="location.reload()">Reset</button>
+    </aside>
+    
+    <section class="gameBoard">
+      <!-- <div class="gameBoard"> -->
+        <div id="bigBoard">
+          
+        </div>
+      <!-- </div> -->
+    </section>
+  <!-- </div> -->
+  <script type="module" src="./src/js/main.js"></script>
+</body>
+</html>
