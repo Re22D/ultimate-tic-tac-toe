@@ -1,10 +1,10 @@
-export class Board{
-    constructor(boardId, boardSize, elem, tblCellsElemArr){
+export class Board {
+    constructor(boardId, boardSize, elem, cellsElementMatrix){
         this.boardId = boardId;
         this.boardSize = boardSize;
         this.boardElem = elem;
-        this.tblCellsElemArr =  tblCellsElemArr; //  || this.createEmptyTwoDimArr(); // changeTo: tblElemRef
-        this.cellsSignArr = this.createEmptyTwoDimArr();
+        this.cellsElementMatrix =  cellsElementMatrix; //  || this.createEmptyMatrix(); // changeTo: tblElemRef
+        this.cellsSignMatrix = this.createEmptyMatrix();
         this.winStatus = {isWin: undefined, winSign: undefined};
     }
 
@@ -13,13 +13,20 @@ export class Board{
         4 digit numbers: <rowBigBoard><colBigBoard><rowInnerBoard><colInnerBoard>
     */
 
-    //Returns a two dimention array, in the size of board
-    createEmptyTwoDimArr(fillVal = null){
+    /**
+     * Returns a two dimention array, in the size of board
+     * @param {*} fillVal value to fill in boards. default: null
+     */
+    createEmptyMatrix(fillVal = null){
         return [...Array(this.boardSize)].map(() => Array(this.boardSize).fill(fillVal));
     }
 
-    // Check if winning is valid for this board, and if so- updating the winning status
-    checkWin(playerSign){
+    /**
+     * Check if new winning is valid for this board, and if so- updating the winning status
+     * @param {char} playerSign X/O
+     * @returns {bool} win status
+     */
+    checkNewWin(playerSign){
         // If someone already won in this board
         if (this.winStatus.isWin === true){
             return false;
@@ -36,34 +43,31 @@ export class Board{
         return isWin;
     }
 
+    /**
+     * Check board rows for win
+     * @param {char} playerSign current players sign - X/O
+     */
     checkRowWin(playerSign){
-        let isWin;
-        //console.log("BRD- check win-", this.cellsSignArr);
-        for (let row = 0; row < this.boardSize; row++){
-            isWin = false;
-            for (let col = 0; col < this.boardSize; col++){
-                if (this.cellsSignArr[row][col] !== playerSign){
-                    isWin = false;
-                    break;
-                } else {
-                    isWin = true;
-                }
-            }
+        const sameSign = currSign => currSign === playerSign;
 
-            if (isWin){
-                return true;
-            }
-        }
-        // return true;
+        const result = this.cellsSignMatrix.find((currRow)=>{
+            return currRow.every(sameSign);
+        });
+
+        return result ? true : false;
     }
 
     // TODO: make general check ?
+    /**
+     * Check board columns for win
+     * @param {char} playerSign current players sign - X/O
+     */
     checkColWin(playerSign){
         let isWin;
         for (let col = 0; col < this.boardSize; col++){
             isWin = false;
             for (let row = 0; row < this.boardSize; row++){
-                if (this.cellsSignArr[row][col] !== playerSign){
+                if (this.cellsSignMatrix[row][col] !== playerSign){
                     isWin = false;
                     break;
                 } else {
@@ -76,33 +80,38 @@ export class Board{
         }
     }
 
+    /**
+     * Check board diagonals for win
+     * @param {char} playerSign current players sign - X/O
+     */
     checkDiagonalWin(playerSign){
         let isWin = true;
         const middleIndex = Math.floor(this.boardSize / 2);
 
-        // Diagonal from left
-        if (this.cellsSignArr[middleIndex][middleIndex] !== playerSign){
+        // If the middle cell isn't of players' sign - there is no any diagonal win
+        if (this.cellsSignMatrix[middleIndex][middleIndex] !== playerSign){
             return false;
         }
 
-        for (let row = 0, col = 0; row < this.boardSize; row++, col++){
+        // Diagonal from left
+        for (let i = 0; i < this.boardSize; i++){
 
-            if (this.cellsSignArr[row][col] !== playerSign){
+            if (this.cellsSignMatrix[i][i] !== playerSign){
                 isWin = false;
                 break;
             }
         }
 
-        // Diagonal from right
         if (isWin){
             return true;
         }
 
+        // Diagonal from right
         for (let row = 0, col = this.boardSize-1;
             col >= 0;
             row++, col--){
 
-            if (this.cellsSignArr[row][col] !== playerSign){
+            if (this.cellsSignMatrix[row][col] !== playerSign){
                 return false;
             }
         }
@@ -115,14 +124,20 @@ export class Board{
      * @param {numer} col cells' column
      */
     getCellValue(row, col){
-        return this.cellsSignArr[row][col];
+        return this.cellsSignMatrix[row][col];
     }
 
-    // set cell with player's sign and update if it's a win
+    /**
+     * Set cell with player's sign and update if it's a win
+     * @param {number} row Selected row number
+     * @param {number} col Selected row number
+     * @param {string} sign Players' sign - X/O
+     * @returns true/false - whether there is a win
+     */
     setCellAndWin(row, col, sign){
-        this.cellsSignArr[row][col] = sign;
+        this.cellsSignMatrix[row][col] = sign;
 
-        return this.checkWin(sign);
+        return this.checkNewWin(sign);
     }
 
 }

@@ -5,7 +5,7 @@ const _ = window._;
 
 export class ComputerPlayer extends Player{
     constructor(name, sign){
-        super(name, sign);
+        super(name, sign, "Computer");
     }
 
     /**
@@ -33,7 +33,7 @@ export class ComputerPlayer extends Player{
      * @returns {number} cell id
      */
     async selectCellAsync(maxNum){
-        const cell = await this.executeInDelay(3000, this.curriedGenerateCellId(maxNum));
+        const cell = await this.executeInDelay(1000, this.curriedGenerateCellId(maxNum));
         return cell;
     }
 
@@ -49,4 +49,5 @@ export class ComputerPlayer extends Player{
             }, ms);
         });
     }
+
 }

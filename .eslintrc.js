@@ -11,5 +11,6 @@ module.exports = {
     },
     "rules": {
         // curly: [2, "multi"]
-    }
+    },
+    "parser": "babel-eslint"
 };

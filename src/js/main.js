@@ -1,8 +1,4 @@
-import {startGame} from "./handleGame.js";
+import {GameController} from "./GameController.js";
 
-const gameBigBoard = document.getElementById("bigBoard");
-const scoreElem = document.getElementById("scoreBoard"); // $("#scoreBoard");
-const gameInfoElem = $("#gameInfo");
-
-startGame(gameBigBoard, scoreElem, gameInfoElem);
-// console.log(gameBigBoard);
+const gameController = new GameController(3);
+gameController.startGame();
